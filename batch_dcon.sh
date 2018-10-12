@@ -1,3 +1,5 @@
+#!/bin/sh
+
 mkdir $2
 for i in $1/*; do
     cp $i ./g

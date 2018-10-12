@@ -12,9 +12,19 @@ TOTAL_EVAL_INDEX = 3
 
 BETA = 'beta'
 
+def extract_evals(path, save_path=None):
+    """
+    Get the evals from a single file and return as numpy ndarray.
+    """
+    evals = _evals_to_vec(path)
+    if save_path is not None:
+        np.save(save_path, evals)
+    return evals
+
+
 def extract_dir_info(dir_path, out_path=None, betas=False):
     """
-    Extracts evecs (or beta vals) where each column is a evec and evecs
+    Extracts evals (or beta vals) where each column are evals and evals
     are sorted from left to right. One unfortunate thing is that there seem
     to be varying amounts of evals for some reason. If evals are missing
     fill in 0s at the bottom.
@@ -22,7 +32,7 @@ def extract_dir_info(dir_path, out_path=None, betas=False):
     files = listdir(dir_path)
     files.sort()
     cols = []
-    extract_vec = _betas_to_vec if betas else _evecs_to_vec
+    extract_vec = _betas_to_vec if betas else _evals_to_vec
     for col, f in enumerate(files):
         f_path = ''.join([dir_path, '/', f])
         cols.append(extract_vec(f_path))
@@ -33,9 +43,9 @@ def extract_dir_info(dir_path, out_path=None, betas=False):
         np.save(out_path, eval_mat)
     return eval_mat
 
-def _evecs_to_vec(path):
+def _evals_to_vec(path):
     """
-    Get the total energy total evecs and load into numpy vector.
+    Get the total energy total evals and load into numpy vector.
     """
     f = open(path, 'r')
     lines = f.readlines()
