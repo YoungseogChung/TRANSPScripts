@@ -5,6 +5,7 @@ Useful scripts for running TRANSP simulations and processing the output.
 
 This is a very basic script used for batch runs of DCON. It takes a target directory consisting of gfiles and will 
 write the output to another specified directory.
+You must move the batch_dcon.sh file to [appropriate_path]/stride-master/dcon/ before running it.
 
 #### Usage
 ```
@@ -22,7 +23,7 @@ a matrix where each column corresponds to one of the files.
 #### Usage
 To get the "total" column in the "Total Energy" eigenvalue column
 ```
-evals_to_py.py <path_to_dcon_output_dir> <path_to_output_.npy_file> 
+evals_to_py.py <path_to_dcon_output_dir> <path_to_output_file_name.npy_file> 
 ```
 Note that it has been observed that there are varying number of eigenvalues in these files. As a result, there may be
 0s at the end of some columns in the matrix if the file doesn't have as many eigenvalues.
